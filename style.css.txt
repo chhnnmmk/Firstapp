@@ -1,0 +1,24 @@
+.display-cover {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 70%;
+margin: 5% auto;
+position: relative;
+}
+
+video {
+width: 100%;
+background: rgba(0, 0, 0, 0.2);
+}
+
+.controls {
+position: absolute;
+right: 20px;
+top: 20px;
+display: flex;
+}
+
+.controls > button {
+margin: 0 6px;
+}
