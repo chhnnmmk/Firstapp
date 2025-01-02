@@ -1,0 +1,38 @@
+const video = document.querySelector('video');
+const playButton = document.getElementById('play');
+const pauseButton = document.getElementById('pause');
+const screenshotButton = document.getElementById('screenshot');
+const canvas = document.querySelector('canvas');
+const screenshotImage = document.querySelector('img');
+
+const constraints = {
+video: {
+facingMode: 'user' // This will access the front camera
+}
+};
+
+playButton.onclick = async () => {
+try {
+const stream = await navigator.mediaDevices.getUser Media(constraints);
+video.srcObject = stream;
+playButton.classList.add('d-none');
+pauseButton.classList.remove('d-none');
+screenshotButton.classList.remove('d-none');
+} catch (error) {
+console.error("Error accessing the camera: ", error);
+}
+};
+
+pauseButton.onclick = () => {
+video.pause();
+playButton.classList.remove('d-none');
+pauseButton.classList.add('d-none');
+};
+
+screenshotButton.onclick = () => {
+canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
+canvas.getContext('2d').drawImage(video, 0, 0);
+screenshotImage.src = canvas.toDataURL('image/webp');
+screenshotImage.style.display = 'block';
+};
